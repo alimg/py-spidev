@@ -281,10 +281,11 @@ SpiDev_xfer(SpiDevObject *self, PyObject *args)
 		return NULL;
 	}
 #endif
+	PyObject* list2 = PyList_New(len);
 
 	for (ii = 0; ii < len; ii++) {
 		PyObject *val = Py_BuildValue("l", (long)rxbuf[ii]);
-		PyList_SET_ITEM(list, ii, val);
+		PyList_SET_ITEM(list2, ii, val);
 	}
 
 	// WA:
@@ -297,8 +298,8 @@ SpiDev_xfer(SpiDevObject *self, PyObject *args)
 	free(txbuf);
 	free(rxbuf);
 
-	Py_INCREF(list);
-	return list;
+	//Py_INCREF(list);
+	return list2;
 }
 
 
